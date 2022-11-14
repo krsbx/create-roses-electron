@@ -1,0 +1,7 @@
+node_modules
+dist
+create-roses-electron-*.tgz
+
+# The test folder for creating a new project
+@krsbx/cre
+my-roses-electron
