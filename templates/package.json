@@ -1,0 +1,16 @@
+{
+  "name": "my-roses-electron",
+  "private": true,
+  "version": "0.0.1",
+  "main": "dist/electron/main/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && electron-builder"
+  },
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "keywords": ["roses","electron","typescript","react","vite"],
+  "author": "",
+  "license": "MIT"
+}
