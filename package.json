@@ -1,6 +1,6 @@
 {
   "name": "create-roses-electron",
-  "version": "0.2.3",
+  "version": "0.1.0",
   "description": "Simplify process of creating an Electron project with React and Vite",
   "main": "dist/index.mjs",
   "scripts": {
