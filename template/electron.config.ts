@@ -1,35 +1,36 @@
-import path from 'path';
-import electron, { onstart } from 'vite-plugin-electron';
+import electron from 'vite-plugin-electron';
 
-const config = electron({
-  main: {
+const config = electron([
+  {
     entry: 'electron/main/index.ts',
     vite: {
       build: {
         // For Debug
         sourcemap: true,
-        outDir: 'dist/electron/main',
+        outDir: 'dist-electron/main',
       },
-      // Will start Electron via VSCode Debug
-      plugins: [process.env.VSCODE_DEBUG ? onstart() : null],
+      plugins: [process.env.VSCODE_DEBUG ? null : null],
     },
   },
-  preload: {
-    input: {
-      // You can configure multiple preload scripts here
-      index: path.join(__dirname, 'electron/preload/index.ts'),
-    },
+  {
+    entry: 'electron/preload/index.ts',
     vite: {
       build: {
         // For Debug
         sourcemap: 'inline',
-        outDir: 'dist/electron/preload',
+        outDir: 'dist-electron/preload',
       },
     },
+    onstart(options) {
+      // Notify the Renderer-Process to reload the page when the Preload-Scripts build is complete,
+      // instead of restarting the entire Electron App.
+      options.reload();
+    },
   },
-  // Enables use of Node.js API in the Electron-Renderer
-  // https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#electron-renderervite-serve
-  renderer: {},
-});
+  {
+    // Enables use of Node.js API in the Electron-Renderer
+    // https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#electron-renderervite-serve
+  },
+]);
 
 export default config;
