@@ -15,7 +15,7 @@ export default defineConfig({
   server: process.env.VSCODE_DEBUG
     ? {
         host: process.env.VITE_DEV_SERVER_HOSTNAME ?? '127.0.0.1',
-        port: parseInt(process.env.VITE_DEV_SERVER_PORT ?? 7777),
+        port: parseInt(process.env.VITE_DEV_SERVER_PORT ?? '7777', 10),
       }
     : undefined,
 });

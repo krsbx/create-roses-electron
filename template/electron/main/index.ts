@@ -2,6 +2,8 @@ import { app, BrowserWindow, shell } from 'electron';
 import { release } from 'os';
 import { join } from 'path';
 
+const DIST_PATH = join(__dirname, '../dist');
+
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration();
 
@@ -17,9 +19,9 @@ process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
 
 export const ROOT_PATH = {
   // /dist
-  dist: join(__dirname, '../..'),
+  dist: DIST_PATH,
   // /dist or /public
-  public: join(__dirname, app.isPackaged ? '../..' : '../../../public'),
+  public: app.isPackaged ? DIST_PATH : join(DIST_PATH, '../public'),
 };
 
 // Here, you can also use other preload
@@ -30,7 +32,7 @@ const indexHtml = join(ROOT_PATH.dist, 'index.html');
 const createWindow = async () => {
   const mainWindow = new BrowserWindow({
     title: 'Main window',
-    icon: join(ROOT_PATH.public, 'favicon.svg'),
+    icon: join(ROOT_PATH.public, 'vite.svg'),
     webPreferences: {
       preload,
       nodeIntegration: true,
