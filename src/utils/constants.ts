@@ -46,5 +46,6 @@ export const PACKAGES = {
     TYPESCRIPT: 'typescript',
     VITE: 'vite',
     VITE_ELECTRON: 'vite-plugin-electron',
+    VITE_ELECTRON_RENDERER: 'vite-plugin-electron-renderer',
   },
 } as const;
